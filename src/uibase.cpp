@@ -6,6 +6,7 @@
 ///////////////////////////////////////////////////////////////////////////
 
 #include "uibase.h"
+#include "util.h"
 
 #include "xpm/about.xpm"
 #include "xpm/addressbook20.xpm"
@@ -96,7 +97,7 @@ CMainFrameBase::CMainFrameBase( wxWindow* parent, wxWindowID id, const wxString&
 	wxBoxSizer* bSizer66;
 	bSizer66 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_staticText41 = new wxStaticText( this, wxID_ANY, _("Balance:"), wxDefaultPosition, wxSize( -1,15 ), 0 );
+	m_staticText41 = new wxStaticText( this, wxID_ANY, _("Balance in "+GetArg("-wallet", "wallet.dat")+":"), wxDefaultPosition, wxSize( -1,15 ), 0 );
 	m_staticText41->Wrap( -1 );
 	bSizer66->Add( m_staticText41, 0, wxALIGN_CENTER_VERTICAL|wxTOP|wxBOTTOM|wxLEFT, 5 );
 	

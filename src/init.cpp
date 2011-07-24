@@ -166,6 +166,7 @@ bool AppInit2(int argc, char* argv[])
             "  bitcoin [options] help              \t\t  " + _("List commands\n") +
             "  bitcoin [options] help <command>    \t\t  " + _("Get help for a command\n") +
           _("Options:\n") +
+            "  -wallet=<file>   \t\t  " + _("Specify wallet file (default: wallet.dat)\n") +
             "  -conf=<file>     \t\t  " + _("Specify configuration file (default: bitcoin.conf)\n") +
             "  -pid=<file>      \t\t  " + _("Specify pid file (default: bitcoind.pid)\n") +
             "  -gen             \t\t  " + _("Generate coins\n") +
@@ -386,7 +387,7 @@ bool AppInit2(int argc, char* argv[])
     printf("Loading wallet...\n");
     nStart = GetTimeMillis();
     bool fFirstRun;
-    pwalletMain = new CWallet("wallet.dat");
+    pwalletMain = new CWallet(GetArg("-wallet", "wallet.dat"));
     int nLoadWalletRet = pwalletMain->LoadWallet(fFirstRun);
     if (nLoadWalletRet != DB_LOAD_OK)
     {
@@ -406,7 +407,7 @@ bool AppInit2(int argc, char* argv[])
         pindexRescan = pindexGenesisBlock;
     else
     {
-        CWalletDB walletdb("wallet.dat");
+        CWalletDB walletdb(GetArg("-wallet", "wallet.dat"));
         CBlockLocator locator;
         if (walletdb.ReadBestBlock(locator))
             pindexRescan = locator.GetBlockIndex();
